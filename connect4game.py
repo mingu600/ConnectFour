@@ -17,6 +17,16 @@ def Hodor(board):
             if board.state[i][j]['player'] is 0:
                 return [i,j]
 
+def Human(board):
+    choice = None
+    while not choice:
+        try:
+            choice = list(input("Enter your move (in form [x,y]): "))
+        except TypeError:
+            print("Unable to read input. Please try again!")
+
+    return choice
+
 class Board:
     def __init__(self, state):
         self.state = state
@@ -143,4 +153,4 @@ class Game:
 
 
 
-Game(Hodor, Hodor).play()
+Game(Hodor, Human).play()
