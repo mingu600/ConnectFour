@@ -118,6 +118,7 @@ class Game:
 
     def play(self):
         global finished
+        finished = False
         cur_player = 1
         turn = 1
         while not finished:
@@ -153,4 +154,4 @@ class Game:
 
 
 
-Game(Hodor, Human).play()
+#Game(Hodor, Human).play()
