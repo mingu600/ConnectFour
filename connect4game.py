@@ -61,7 +61,6 @@ class Game:
     def __init__(self,a,b):
         self.player1 = a
         self.player2 = b
-
         #constuct empty board
         self.board = Board([[{'player':0,'right':0,'left':0,'vertical':0,'horizontal':0, 'x': j, 'y': i} for i in range(0,height)] for j in range(0,width)])
 
@@ -127,7 +126,7 @@ class Game:
         while not finished:
             move = self.player1(self.board) if cur_player is 1 else self.player2(self.board)
             #verify that slot is open, and position below it is filled
-            if move >= 0 and move < width and self.available(move) is not False and self.board.state[move][self.available(move)]['player'] is 0:
+            if isinstance(move, int) and move >= 0 and move < width and self.available(move) is not False and self.board.state[move][self.available(move)]['player'] is 0:
                 open_row = self.available(move)
                 desired_spot = self.board.state[move][open_row]
                 desired_spot['player'] = cur_player
@@ -137,13 +136,22 @@ class Game:
                     self.board[move[0]][move[1]]['vertical'] = self.board[move[0]-1][move[1]]['vertical'] + 1
                 if
                 '''
+                print("Turn %d: Printing current board..." % turn)
+                self.board.printBoard()
+                self.checkStatus(desired_spot, move, open_row)
+
+            elif isinstance(move, list) and len(move) == 2 and self.board.state[move[0]][move[1]]['player'] == 0 and (self.board.state[move[0]][move[1] - 1]['player'] is not 0 or move[1] == 0):
+                    desired_spot = self.board.state[move[0]][move[1]]
+                    desired_spot['player'] = cur_player
+                    self.board.updateBoard(move[0], move[1], cur_player)
+                    print("Turn %d: Printing current board..." % turn)
+                    self.board.printBoard()
+                    self.checkStatus(desired_spot, move[0], move[1])
+
             else:
                 print("Invalid move by player %d\n" % cur_player)
                 continue
 
-            print("Turn %d: Printing current board..." % turn)
-            self.board.printBoard()
-            self.checkStatus(desired_spot, move, open_row)
             if finished is True:
                 print("Player %d has won!" % cur_player)
             else:
