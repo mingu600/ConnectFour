@@ -1,5 +1,6 @@
-def next_move(board):
-    import connect4game
+import connect4game
+
+def next_move(board, player):
     for j in range(0, connect4game.height):
         for i in range (0, connect4game.width):
             if board.state[i][j]['player'] is 0:
