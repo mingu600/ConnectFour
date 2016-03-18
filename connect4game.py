@@ -1,5 +1,5 @@
 from __future__ import print_function
-import
+
 '''
 Implements Game class for connect-4
 '''
@@ -11,12 +11,6 @@ n = 4
 finished = False
 
 #stupid bot, finds first available open spot
-def Hodor(board):
-    for j in range(0,height):
-        for i in range (0,width):
-            if board.state[i][j]['player'] is 0:
-                return i
-
 def Human(board):
     choice = False
     while not choice:
@@ -160,8 +154,6 @@ class Game:
                 print("Tie Game!")
             else:
                 turn += 1
+import hodor
 
-
-
-
-Game(Hodor, Human).play()
+Game(hodor.next_move, Human).play()
