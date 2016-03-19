@@ -1,5 +1,5 @@
 from __future__ import print_function
-
+import sys
 '''
 Implements Game class for connect-4
 '''
@@ -15,7 +15,7 @@ def Human(board, player):
     choice = False
     while not choice:
         try:
-            print("Enter your move (column number/x-coordinate, from 0 to width - 1)")
+            print("Enter your move (column number, from 0 to " + str(width - 1) + ")")
             choice = int(input())
         except TypeError:
             print("Unable to read input. Please try again!")
@@ -27,15 +27,26 @@ class Board:
         self.state = state
 
     def printBoard(self):
+        print("")
+        for k in range(0, width):
+            print(' ', k, ' ', end="")
+        print("")
+        print("")
         for j in range(0,height):
             for i in range(0,width):
                 if self.state[i][height-j-1]['player'] is 0:
-                    print("O",end="")
+                    print('|', u'\u26AA', ' ',end="")
                 elif self.state[i][height-j-1]['player'] is 1:
-                    print("*",end="")
+                    print('|', u'\U0001F534', ' ' ,end="")
                 else:
-                    print("@",end="")
+                    print('|', u'\u26AB', ' ',end="")
+            print("|", end="")
             print("")
+            grid = " ----"
+            line = ''
+            for k in range(0, width):
+                line += grid
+            print(line)
 
     def updateBoard(self, x, y, player):
         neighbors = [-1, 0, 1]
@@ -123,6 +134,7 @@ class Game:
         global finished
         cur_player = 1
         turn = 1
+        self.board.printBoard()
         while not finished:
             move = self.player1(self.board, cur_player) if cur_player is 1 else self.player2(self.board, cur_player)
             #verify that slot is open, and position below it is filled
@@ -154,14 +166,19 @@ class Game:
 
             if finished is True:
                 print("Player %d has won!" % cur_player)
+                sys.exit('Game Over!')
             else:
                 cur_player = 1 + (cur_player % 2)
 
             if turn is width * height:
                 finished = True
                 print("Tie Game!")
+                sys.exit('Game Over!')
             else:
                 turn += 1
-#import hodor
 
-#Game(Human, hodor.next_move).play()
+import hodor
+import firstBot
+if __name__ == "__main__":
+    Game(Human, hodor.next_move).play()
+
