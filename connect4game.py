@@ -162,6 +162,6 @@ class Game:
                 print("Tie Game!")
             else:
                 turn += 1
-import hodor
+#import hodor
 
-Game(Human, hodor.next_move).play()
+#Game(Human, hodor.next_move).play()
