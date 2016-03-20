@@ -36,10 +36,13 @@ class Board:
             for i in range(0,width):
                 if self.state[i][height-j-1]['player'] is 0:
                     print('|', u'\u26AA', ' ',end="")
+                    #print('|', 0, ' ',end="")
                 elif self.state[i][height-j-1]['player'] is 1:
                     print('|', u'\U0001F534', ' ' ,end="")
+                    #print('|', '*', ' ' ,end="")
                 else:
                     print('|', u'\u26AB', ' ',end="")
+                    #print('|', '$', ' ',end="")
             print("|", end="")
             print("")
             grid = " ----"
@@ -170,7 +173,7 @@ class Game:
             else:
                 cur_player = 1 + (cur_player % 2)
 
-            if turn is width * height:
+            if turn == width * height:
                 finished = True
                 print("Tie Game!")
                 sys.exit('Game Over!')
@@ -180,5 +183,4 @@ class Game:
 import hodor
 import firstBot
 if __name__ == "__main__":
-    Game(Human, hodor.next_move).play()
-
+    Game(Human, firstBot.next_move).play()
