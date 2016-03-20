@@ -12,14 +12,14 @@ finished = False
 
 #stupid bot, finds first available open spot
 def Human(board, player):
-    choice = False
-    while not choice:
-        try:
-            print("Enter your move (column number, from 0 to " + str(width - 1) + ")")
-            choice = int(input())
-        except TypeError:
+    while True:
+        print("Enter your move (column number, from 0 to " + str(width - 1) + ")")
+        choice = input().strip()
+        if choice and all(c in '0123456789' for c in choice):
+            choice = int(choice)
+            break
+        else:
             print("Unable to read input. Please try again!")
-        break
     return choice
 
 class Board:
