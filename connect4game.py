@@ -178,7 +178,7 @@ class Game:
                 turn += 1
 
 import hodor
-import firstBot
+import rob_bot as rg
 if __name__ == "__main__":
-    Game(Human, hodor.next_move).play()
+    Game(rg.robbot, rg.robbot).play()
 
