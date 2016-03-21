@@ -214,7 +214,7 @@ def next_move(board, player):
                 opp_desired_spot['player'] = 0
                 desired_spot['player'] = 0
                 return i
-            finalScore2 = 5 ** myBest - 6 ** max(bestOppmove) - 5 * abs(i - (connect4game.width - 1) / 2)
+            finalScore2 = 5 ** myBest - 8 ** max(bestOppmove) - 5 * abs(i - (connect4game.width - 1) / 2)
             finalScores2.append([i, j, finalScore2])
             for s in finalScores2:
                 for t in finalScores:
